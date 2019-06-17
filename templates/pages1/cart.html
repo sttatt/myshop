@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700,700italic|Playfair+Display:400,700&subset=latin,cyrillic">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.css">
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style/style.css' %}">
+    <script src="{% static 'scripts/scripts.js' %}"></script>
+
+</head>
+<body>
+        <header>
+        <nav class="container">
+            <a class="logo" href="index.html">
+                <span>L</span>
+                <span>O</span>
+                <span>G</span>
+                <span>O</span>
+            </a>
+            <ul id="auth">
+                {% if user.is_authenticated %}
+                    <li><a>{{ user.username }}</a></li>
+                    <li><a href="">Личный кабинет</a></li>
+                    <li><a href="/logout">Выход</a></li>
+                {% else %}
+                    <li><a href="auth">ВХОД</a></li>
+                    <li><a href="registration">РЕГИСТРАЦИЯ</a></li>
+                {% endif %}
+            <li>
+                        <div class="poster">
+                            <a href="{% url 'cart:CartDetail' %}" class="noanim"><img src="{% static 'img/cart.png' %}" style="display: inline-block !important;"></a>
+                        <div class="descr">
+                            Колличество товаров в корзине: N шт.;
+                            <br>
+                            Стоимость: xxx $;
+                        </div>
+                        </div>
+                    </li>
+            </ul>
+        </nav>
+    </header>
+
+    <nav class="container">
+        <ul id="menu">
+            <li><a href="index">На главную</a></li>
+            <li><a href="products">Товары</a></li>
+            <li><a href="omag">О магазине</a></li>
+            <li><a href="cont.html">Контакты</a></li>
+            <li><a href="">Корзина</a></li>
+        </ul>
+    </nav>
+
+        <div class="container1">
+        <div class="cart">
+            <div class="cart_zag"><h2>Корзина</h2></div>
+            <div class="cart_osn">
+                <div class="table">
+                    <table  class="tb1">
+                        <tr>
+                            <th>Изображение</th>
+                            <th>Продукт</th>
+                            <th>Колличество</th>
+                            <th>Цена</th>
+                            <th>Полная стоимость</th>
+                            <th>Убрать из корзины</th>
+                        </tr>
+                        <tr>
+                            <td><a href=""><img src="img/1.png" alt=""></a></td>
+                            <td>Apple Iphone 7s 64 GB [Gold]</td>
+                            <td>2</td>
+                            <td>720$</td>
+                            <td>1440$</td>
+                            <td><a href="" class="del">Удалить</a></td>
+                        </tr>
+                        <tr>
+                                <td><a href=""><img src="img/1.png" alt=""></a></td>
+                                <td>Apple Iphone 7s 64 GB [Gold]</td>
+                                <td>2</td>
+                                <td>720$</td>
+                                <td>1440$</td>
+                                <td><a href="" class="del">Удалить</a></td>
+                            </tr>
+                            <tr>
+                                    <td><a href=""><img src="img/1.png" alt=""></a></td>
+                                    <td>Apple Iphone 7s 64 GB [Gold]</td>
+                                    <td>2</td>
+                                    <td>720$</td>
+                                    <td>1440$</td>
+                                    <td><a href="" class="del">Удалить</a></td>
+                                </tr>
+                    </table>
+                </div>
+                <div class="zakaz">
+                    <div class="padding1"> <h3>Общая стоимость: 4320$</h3></div>
+                    <a href="oform.html">Оформить заказ</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-col"><span>Интернет магазин © 2019</span></div>
+            <div class="footer-col">
+                <div class="social-bar-wrap">
+                    <a title="Вконтакте" href="https://vk.com/dmitryluchinkin" target="_blank"><i class="fa fa-vk"></i></a>
+                    <a title="Instagram" href="https://www.instagram.com/luchinkindmitry/?hl=ru" target="_blank"><i class="fa fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <a href="mailto:luchinkindmitry@gmail.com">E-mail</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

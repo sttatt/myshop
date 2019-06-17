@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700,700italic|Playfair+Display:400,700&subset=latin,cyrillic">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.css">
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style/style.css' %}">
+    <script src="{% static 'scripts/scripts.js' %}"></script>
+
+</head>
+<body>
+        <header>
+                <nav class="container1">
+                    <a class="logo" href="index.html">
+                        <span>L</span>
+                        <span>O</span>
+                        <span>G</span>
+                        <span>O</span>
+                    </a>
+                    <ul id="auth">
+                {% if user.is_authenticated %}
+                    <li><a>{{ user.username }}</a></li>
+                    <li><a href="{% url "lk:main" %}">Личный кабинет</a></li>
+                    <li><a href="{% url "main:logout" %}">Выход</a></li>
+                {% else %}
+                    <li><a href="{% url "main:auth" %}">ВХОД</a></li>
+                    <li><a href="{% url "main:registration" %}">РЕГИСТРАЦИЯ</a></li>
+                {% endif %}
+                    <li>
+                        <div class="poster">
+                            <a href="{% url 'cart:CartDetail' %}" class="noanim"><img src="{% static 'img/cart.png' %}" style="display: inline-block !important;"></a>
+                        </div>
+                    </li>
+            </ul>
+                </nav>
+            </header>
+
+    <nav class="container1">
+        <ul id="menu">
+            <li><a href="{% url "main:index" %}">На главную</a></li>
+            <li><a href="{% url 'main:products' %}">Товары</a></li>
+            <li><a href="{% url "main:about" %}">О магазине</a></li>
+            <li><a href="{% url "main:contacts"%}">Контакты</a></li>
+            <li><a href="{% url "cart:CartDetail" %}">Корзина</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container1">
+        <div class="glav">
+            <div class="glav_zag"><h2>Заголовок</h2></div>
+            <div class="allline">
+                <div class="line">
+                    {% if products_list %}
+                        {% for product in products_list %}
+                            <div class="tovar">
+                                {% load staticfiles %}
+                                <div class="tovar_img"><img src="{% static 'img'%}/{{ product.image_source }}" alt=""></div>
+                                <div class="opis">
+                                    <div class="opis_zag"><h2>{{ product}}</h2></div>
+                                    <div class="opis_text">
+                                        <p>{{ product.description }}</p>
+                                        <p>{{ product.company}}</p>
+                                        <p>{{ product.company.country }}</p>
+                                        <form action="{% url "cart:CartAdd" product.id %}" method="post">
+                                            {% csrf_token %}
+                                            {{ cart_product_form }}
+                                            {% csrf_token %}
+                                            <input type="submit" value="Добавить в корзину" class="knopka">
+                                        </form>
+                                    </div>
+                                </div>
+
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+{#                    <div class="tovar">#}
+{#                        <div class="tovar_img"><a href=""><img src="img/1.png" alt=""></a></div>#}
+{#                        <div class="opis">#}
+{#                            <div class="opis_zag"><h2>Товар</h2></div>#}
+{#                            <div class="opis_text">#}
+{#                                <p> #}
+{#                                    Описание описание описание описание описание описание описание описание описание описание #}
+{#                                    описание описание описание описание описание описание описание описание описание описание#}
+{#                                </p>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div>#}
+{#                            <div class="chislo">#}
+{#                                <form action="handler.php">#}
+{#                                    <p>Колличество</p>#}
+{#                                    <p><input type="number" size="3" name="num" min="1" max="10" value="1"></p>#}
+{#                                </form>#}
+{#                            </div>#}
+{#                            <div class="pert"><a href="">Добавить в корзину</a></div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="tovar">#}
+{#                            <div class="tovar_img"><a href=""><img src="img/1.png" alt=""></a></div>#}
+{#                            <div class="opis">#}
+{#                                <div class="opis_zag"><h2>Товар</h2></div>#}
+{#                                <div class="opis_text">#}
+{#                                    <p> #}
+{#                                        Описание описание описание описание описание описание описание описание описание описание #}
+{#                                        описание описание описание описание описание описание описание описание описание описание#}
+{#                                    </p>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div>#}
+{#                                <div class="chislo">#}
+{#                                    <form action="handler.php">#}
+{#                                        <p>Колличество</p>#}
+{#                                        <p><input type="number" size="3" name="num" min="1" max="10" value="1"></p>#}
+{#                                    </form>#}
+{#                                </div>#}
+{#                                <div class="pert"><a href="">Добавить в корзину</a></div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="tovar">#}
+{#                                <div class="tovar_img"><a href=""><img src="img/1.png" alt=""></a></div>#}
+{#                                <div class="opis">#}
+{#                                    <div class="opis_zag"><h2>Товар</h2></div>#}
+{#                                    <div class="opis_text">#}
+{#                                        <p> #}
+{#                                            Описание описание описание описание описание описание описание описание описание описание #}
+{#                                            описание описание описание описание описание описание описание описание описание описание#}
+{#                                        </p>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div>#}
+{#                                    <div class="chislo">#}
+{#                                        <form action="handler.php">#}
+{#                                            <p>Колличество</p>#}
+{#                                            <p><input type="number" size="3" name="num" min="1" max="10" value="1"></p>#}
+{#                                        </form>#}
+{#                                    </div>#}
+{#                                    <div class="pert"><a href="">Добавить в корзину</a></div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                </div>#}
+{#                <div class="line">#}
+{#                        <div class="tovar">#}
+{#                            <div class="tovar_img"><a href=""><img src="img/1.png" alt=""></a></div>#}
+{#                            <div class="opis">#}
+{#                                <div class="opis_zag"><h2>Товар</h2></div>#}
+{#                                <div class="opis_text">#}
+{#                                    <p> #}
+{#                                        Описание описание описание описание описание описание описание описание описание описание #}
+{#                                        описание описание описание описание описание описание описание описание описание описание#}
+{#                                    </p>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div>#}
+{#                                <div class="chislo">#}
+{#                                    <form action="handler.php">#}
+{#                                        <p>Колличество</p>#}
+{#                                        <p><input type="number" size="3" name="num" min="1" max="10" value="1"></p>#}
+{#                                    </form>#}
+{#                                </div>#}
+{#                                <div class="pert"><a href="">Добавить в корзину</a></div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="tovar">#}
+{#                                <div class="tovar_img"><a href=""><img src="img/1.png" alt=""></a></div>#}
+{#                                <div class="opis">#}
+{#                                    <div class="opis_zag"><h2>Товар</h2></div>#}
+{#                                    <div class="opis_text">#}
+{#                                        <p> #}
+{#                                            Описание описание описание описание описание описание описание описание описание описание #}
+{#                                            описание описание описание описание описание описание описание описание описание описание#}
+{#                                        </p>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div>#}
+{#                                    <div class="chislo">#}
+{#                                        <form action="handler.php">#}
+{#                                            <p>Колличество</p>#}
+{#                                            <p><input type="number" size="3" name="num" min="1" max="10" value="1"></p>#}
+{#                                        </form>#}
+{#                                    </div>#}
+{#                                    <div class="pert"><a href="">Добавить в корзину</a></div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="tovar">#}
+{#                                    <div class="tovar_img"><a href=""><img src="img/1.png" alt=""></a></div>#}
+{#                                    <div class="opis">#}
+{#                                        <div class="opis_zag"><h2>Товар</h2></div>#}
+{#                                        <div class="opis_text">#}
+{#                                            <p> #}
+{#                                                Описание описание описание описание описание описание описание описание описание описание #}
+{#                                                описание описание описание описание описание описание описание описание описание описание#}
+{#                                            </p>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div>#}
+{#                                        <div class="chislo">#}
+{#                                            <form action="handler.php">#}
+{#                                                <p>Колличество</p>#}
+{#                                                <p><input type="number" size="3" name="num" min="1" max="10" value="1"></p>#}
+{#                                            </form>#}
+{#                                        </div>#}
+{#                                        <div class="pert"><a href="">Добавить в корзину</a></div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+                    </div>
+
+            
+            <div class="container1">                                                                                     <!-- НОМЕР СТРАНИЦЫ !-->
+                    <div class="item-list">
+                        <ul class="pager">
+                        <li class="pager-current first"><span>1</span></li>
+                        <li class="pager-item"><a href="/node?page=1" title="На страницу номер 2">2</a></li>
+                        <li class="pager-item"><a href="/node?page=2" title="На страницу номер 3">3</a></li>
+                        <li class="pager-item"><a href="/node?page=3" title="На страницу номер 4">4</a></li>
+                        <li class="pager-next last"><a href="/node?page=1" title="На следующую страницу">›</a></li>
+                        </ul>
+                    </div>
+            </div>                                                                                                      <!-- НОМЕР СТРАНИЦЫ !-->                         
+        </div>
+    </div>
+
+    <footer>
+        <div class="container1">
+            <div class="footer-col"><span>Интернет магазин © 2019</span></div>
+            <div class="footer-col">
+                <div class="social-bar-wrap">
+                    <a title="Вконтакте" href="https://vk.com/dmitryluchinkin" target="_blank"><i class="fa fa-vk"></i></a>
+                    <a title="Instagram" href="https://www.instagram.com/luchinkindmitry/?hl=ru" target="_blank"><i class="fa fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <a href="mailto:luchinkindmitry@gmail.com">E-mail</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

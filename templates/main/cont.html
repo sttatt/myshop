@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700,700italic|Playfair+Display:400,700&subset=latin,cyrillic">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.css">
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style/style.css' %}">
+    <script src="{% static 'scripts/scripts.js' %}"></script>
+
+</head>
+<body>
+        <header>
+                <nav class="container1">
+                    <a class="logo" href="index.html">
+                        <span>L</span>
+                        <span>O</span>
+                        <span>G</span>
+                        <span>O</span>
+                    </a>
+                    <ul id="auth">
+                {% if user.is_authenticated %}
+                    <li><a>{{ user.username }}</a></li>
+                    <li><a href="{% url "lk:main" %}">Личный кабинет</a></li>
+                    <li><a href="{% url "main:logout" %}">Выход</a></li>
+                {% else %}
+                    <li><a href="{% url "main:auth" %}">ВХОД</a></li>
+                    <li><a href="{% url "main:registration" %}">РЕГИСТРАЦИЯ</a></li>
+                {% endif %}
+                    <li>
+                        <div class="poster">
+                            <a href="{% url 'cart:CartDetail' %}" class="noanim"><img src="{% static 'img/cart.png' %}" style="display: inline-block !important;"></a>
+                        </div>
+                    </li>
+            </ul>
+                </nav>
+            </header>
+
+    <nav class="container1">
+        <ul id="menu">
+            <li><a href="{% url "main:index" %}">На главную</a></li>
+            <li><a href="{% url 'main:products' %}">Товары</a></li>
+            <li><a href="{% url "main:about" %}">О магазине</a></li>
+            <li><a href="{% url "main:contacts"%}">Контакты</a></li>
+            <li><a href="{% url "cart:CartDetail" %}">Корзина</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container1">
+        <div class="cont">
+            <div class="cont_zag"><h2>Контакты</h2></div>
+            <div class="cont_osn">
+                <div class="osn_mapiopis">
+                    <div class="mapiopis_map">
+                        <div class="map">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2242.823997935828!2d37.791340316047666!3d55.79629399610415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b534ce1ccf3169%3A0xb53ca847fa9cdc20!2zNy3RjyDQn9Cw0YDQutC-0LLQsNGPINGD0LsuLCA5LzI2LCDQnNC-0YHQutCy0LAsIDEwNTI2NA!5e0!3m2!1sru!2sru!4v1551721186812" width="500" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>
+                        </div>   
+                    </div>
+                    <div class="mapiopis_opis">
+                        <div class="mapiopis_opis_zag">
+                            <h2>Заголовок1</h2>
+                        </div>
+                        <div class="mapiopis_opis_text">
+                            <p>
+                                Текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+                                текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="cont_opis">
+                        <div class="cont_opis_zag">
+                            <h2>Заголовок2</h2>
+                        </div>
+                        <div class="cont_opis_text">
+                            <p>
+                                Текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+                                текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+                                текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+                                текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+                            </p>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container1">
+            <div class="footer-col"><span>Интернет магазин © 2019</span></div>
+            <div class="footer-col">
+                <div class="social-bar-wrap">
+                    <a title="Вконтакте" href="https://vk.com/dmitryluchinkin" target="_blank"><i class="fa fa-vk"></i></a>
+                    <a title="Instagram" href="https://www.instagram.com/luchinkindmitry/?hl=ru" target="_blank"><i class="fa fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <a href="mailto:luchinkindmitry@gmail.com">E-mail</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

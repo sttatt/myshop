@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700,700italic|Playfair+Display:400,700&subset=latin,cyrillic">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.css">
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style/style.css' %}">
+    <script src="{% static 'scripts/scripts.js' %}"></script>
+
+</head>
+<body>
+        <header>
+                <nav class="container1">
+                    <a class="logo" href="index.html">
+                        <span>L</span>
+                        <span>O</span>
+                        <span>G</span>
+                        <span>O</span>
+                    </a>
+                    <ul id="auth">
+                            {% if user.is_authenticated%}
+                                <li><a>{{ user.username }}</a></li>
+                                <li><a href="{% url "lk:main" %}">Личный кабинет</a></li>
+                                <li><a href="{% url "main:logout" %}">Выход</a></li>
+                            {% else %}
+                                <li><a href="{% url "main:auth" %}">ВХОД</a></li>
+                                <li><a href="{% url "main:registration" %}">РЕГИСТРАЦИЯ</a></li>
+                            {% endif %}
+                                <li>
+                        <div class="poster">
+                            <a href="{% url 'cart:CartDetail' %}" class="noanim"><img src="{% static 'img/cart.png' %}" style="display: inline-block !important;"></a>
+                        </div>
+                    </li>
+            </ul>
+                </nav>
+            </header>
+
+    <nav class="container1">
+        <ul id="menu">
+            <li><a href="{% url "main:index" %}">На главную</a></li>
+            <li><a href="{% url 'main:products' %}">Товары</a></li>
+            <li><a href="{% url "main:about" %}">О магазине</a></li>
+            <li><a href="{% url "main:contacts"%}">Контакты</a></li>
+            <li><a href="{% url "cart:CartDetail" %}">Корзина</a></li>
+        </ul>
+    </nav>
+
+    <div class="container1">
+        <div class="rasp">
+            {% csrf_token %}
+            <h3>Войти на сайт</h3>
+            <form action="/auth" method="post" class="ui-form" id="ui-form">
+                {% csrf_token %}
+                {{ form }}
+                <p><input  type="submit" value="Войти"></p>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container1">
+            <div class="footer-col"><span>Интернет магазин © 2019</span></div>
+            <div class="footer-col">
+                <div class="social-bar-wrap">
+                    <a title="Вконтакте" href="https://vk.com/dmitryluchinkin" target="_blank"><i class="fa fa-vk"></i></a>
+                    <a title="Instagram" href="https://www.instagram.com/luchinkindmitry/?hl=ru" target="_blank"><i class="fa fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <a href="mailto:luchinkindmitry@gmail.com">E-mail</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
