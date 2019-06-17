@@ -80,12 +80,12 @@ WSGI_APPLICATION = 'Shop.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'shop',
-        'USER' : 'postgres',
+        'USER' : 'root',
         'PASSWORD' : '401964andrew',
         'HOST' : 'localhost',
-        'PORT' : '5432',
+        'PORT' : '3306',
     }
 }
 
@@ -148,3 +148,4 @@ CSRF_COOKIE_DOMAIN = '127.0.0.1'
 SESSION_COOKIE_DOMAIN = '127.0.0.1'
 # SESSION_COOKIE_PATH = '/cart'
 CART_SESSION_ID = 'cart'
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
